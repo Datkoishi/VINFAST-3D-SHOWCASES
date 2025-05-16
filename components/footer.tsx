@@ -131,7 +131,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-zinc-800 pt-8 text-center text-zinc-500">
-          <p>&copy; {new Date().getFullYear()} VinFast 3D Showcase. Tất cả các quyền được bảo lưu.</p>
+          <p>&copy; {new Date().getFullYear()} VinFast 3D Showcase. Designed & Developed by truongdat.</p>
         </div>
       </div>
     </footer>
