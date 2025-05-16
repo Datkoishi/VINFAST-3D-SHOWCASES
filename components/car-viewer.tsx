@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useRef, useState, Suspense } from "react"
-import { Canvas, useFrame, useThree } from "@react-three/fiber"
+import React, { useEffect, useRef, useState, Suspense } from "react"
+import { useFrame, useThree } from "@react-three/fiber"
 import { OrbitControls, PerspectiveCamera, Environment, useGLTF, Html, Sphere } from "@react-three/drei"
 import { Button } from "@/components/ui/button"
 import { ZoomIn, ZoomOut, RotateCw, Info } from "lucide-react"
@@ -9,6 +9,12 @@ import { useToast } from "@/components/ui/use-toast"
 import { useMobile } from "@/hooks/use-mobile"
 import { motion, AnimatePresence } from "framer-motion"
 import * as THREE from "three"
+import dynamic from "next/dynamic"
+
+// Import Canvas với noSSR để tránh lỗi khi render trên server
+const Canvas = dynamic(() => import("@react-three/fiber").then((mod) => mod.Canvas), {
+  ssr: false,
+})
 
 // Fallback model for testing
 const DUCK_MODEL_PATH = "/assets/3d/duck.glb"
@@ -273,6 +279,45 @@ function CarScene({
   )
 }
 
+function WebGLErrorFallback() {
+  return (
+    <div className="h-full w-full flex items-center justify-center bg-zinc-900 rounded-xl">
+      <div className="text-center p-6">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-red-500/20 flex items-center justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-red-500"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" x2="12" y1="8" y2="12" />
+            <line x1="12" x2="12.01" y1="16" y2="16" />
+          </svg>
+        </div>
+        <h3 className="text-xl font-bold text-white mb-2">Không thể tải trình xem 3D</h3>
+        <p className="text-zinc-400 mb-4">
+          Trình duyệt của bạn không hỗ trợ WebGL hoặc đã bị tắt. Vui lòng thử trình duyệt khác hoặc kiểm tra cài đặt.
+        </p>
+        <a
+          href="https://get.webgl.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-red-500 hover:text-red-400 underline"
+        >
+          Tìm hiểu thêm về WebGL
+        </a>
+      </div>
+    </div>
+  )
+}
+
 export default function CarViewer({
   modelPath,
   activeView = "exterior",
@@ -282,8 +327,17 @@ export default function CarViewer({
 }: CarViewerProps) {
   const isMobile = useMobile()
   const [isLoaded, setIsLoaded] = useState(false)
+  const [hasWebGLError, setHasWebGLError] = useState(false)
 
   useEffect(() => {
+    // Kiểm tra WebGL support
+    const canvas = document.createElement("canvas")
+    const gl = canvas.getContext("webgl2") || canvas.getContext("webgl")
+
+    if (!gl) {
+      setHasWebGLError(true)
+    }
+
     // Simulate model loading
     const timer = setTimeout(() => {
       setIsLoaded(true)
@@ -291,6 +345,10 @@ export default function CarViewer({
 
     return () => clearTimeout(timer)
   }, [])
+
+  if (hasWebGLError) {
+    return <WebGLErrorFallback />
+  }
 
   return (
     <div className="w-full h-full relative">
@@ -303,9 +361,19 @@ export default function CarViewer({
         </div>
       )}
 
-      <Canvas shadows dpr={[1, isMobile ? 1.5 : 2]}>
-        <CarScene modelPath={modelPath} activeView={activeView} colorData={colorData} showHotspots={showHotspots} />
-      </Canvas>
+      <ErrorBoundary FallbackComponent={WebGLErrorFallback}>
+        <Canvas
+          shadows
+          dpr={[1, isMobile ? 1.5 : 2]}
+          onCreated={({ gl }) => {
+            // Cấu hình thêm cho WebGL renderer
+            gl.setClearColor("#000000", 0)
+            gl.physicallyCorrectLights = true
+          }}
+        >
+          <CarScene modelPath={modelPath} activeView={activeView} colorData={colorData} showHotspots={showHotspots} />
+        </Canvas>
+      </ErrorBoundary>
 
       <AnimatePresence>
         {showHotspots && (
@@ -323,4 +391,28 @@ export default function CarViewer({
       </AnimatePresence>
     </div>
   )
+}
+
+// Thêm ErrorBoundary component để bắt lỗi React
+class ErrorBoundary extends React.Component<{
+  children: React.ReactNode
+  FallbackComponent: React.ComponentType
+}> {
+  state = { hasError: false }
+
+  static getDerivedStateFromError() {
+    return { hasError: true }
+  }
+
+  componentDidCatch(error: any, errorInfo: any) {
+    console.error("WebGL Error:", error, errorInfo)
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <this.props.FallbackComponent />
+    }
+
+    return this.props.children
+  }
 }
