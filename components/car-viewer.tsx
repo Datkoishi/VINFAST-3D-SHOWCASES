@@ -54,7 +54,6 @@ interface CarViewerProps {
   showHotspots: boolean
 }
 
-// Thay đổi phần khai báo interface Hotspot để thêm thuộc tính offset
 interface Hotspot {
   position: [number, number, number]
   surfacePosition: [number, number, number]
@@ -91,43 +90,43 @@ function Model({
     setTime((state) => state + 0.01)
   })
 
-  // Thay đổi phần useEffect để cập nhật vị trí các điểm đỏ
+  // Generate some sample hotspots based on the active view
   useEffect(() => {
     if (activeView === "exterior") {
       setHotspots([
         // Điểm đỏ cho đèn pha - vị trí điểm nổi và vị trí thực tế trên bề mặt xe
         {
-          position: [0.8, 0.52, 1.8], // Đã hạ thấp xuống
-          surfacePosition: [0.8, 0.5, 1.8], // Vị trí thực tế trên bề mặt xe
+          position: [-0.5, -0.3, 2.8], // Hạ xuống chỉ còn 0.01 đơn vị so với bề mặt
+          surfacePosition: [-0.5, -0.3, 2.8], // Vị trí thực tế trên bề mặt xe
           title: "Đèn pha LED",
           description:
             "Đèn pha LED ma trận thích ứng với thiết kế hiện đại, tự động điều chỉnh theo điều kiện ánh sáng",
         },
         // Điểm đỏ cho lưới tản nhiệt
         {
-          position: [-0.8, 0.52, 1.8], // Đã hạ thấp xuống
-          surfacePosition: [-0.8, 0.5, 1.8],
+          position: [0.5, 0, 3], // Hạ xuống chỉ còn 0.01 đơn vị so với bề mặt
+          surfacePosition: [0.3, -0.8, 2.5],
           title: "Lưới tản nhiệt",
           description: "Lưới tản nhiệt đặc trưng của VinFast với thiết kế V-shape độc đáo",
         },
         // Điểm đỏ cho mâm xe
         {
-          position: [1.2, 0.32, 0], // Đã hạ thấp xuống
-          surfacePosition: [1.2, 0.3, 0],
+          position: [1.15, -1, -1.8], // Hạ xuống chỉ còn 0.01 đơn vị so với bề mặt
+          surfacePosition: [1.15, -1, -1.8],
           title: "Mâm xe hợp kim",
           description: "Mâm hợp kim 19 inch với thiết kế thể thao, tăng tính khí động học",
         },
         // Điểm đỏ cho đèn hậu
         {
-          position: [0, 0.72, -1.8], // Đã hạ thấp xuống
-          surfacePosition: [0, 0.7, -1.8],
+          position: [0.5, -0.31, -2.8], // Hạ xuống chỉ còn 0.01 đơn vị so với bề mặt
+          surfacePosition: [0.5, -0.31, -2.8],
           title: "Đèn hậu LED",
           description: "Cụm đèn hậu LED với hiệu ứng 3D, tăng khả năng nhận diện và an toàn",
         },
         // Điểm đỏ cho cửa sổ trời
         {
-          position: [0, 1.02, 0], // Đã hạ thấp xuống
-          surfacePosition: [0, 1.0, 0],
+          position: [0, 0.4, 0], // Hạ xuống chỉ còn 0.01 đơn vị so với bề mặt
+          surfacePosition: [0, 0.4, 0],
           title: "Cửa sổ trời toàn cảnh",
           description: "Cửa sổ trời toàn cảnh với khả năng chống tia UV, tạo không gian thoáng đãng",
         },
@@ -136,7 +135,7 @@ function Model({
       setHotspots([
         // Điểm đỏ cho màn hình trung tâm
         {
-          position: [0, 0.82, 0.3], // Đã hạ thấp xuống
+          position: [0, 0.81, 0.3], // Hạ xuống chỉ còn 0.01 đơn vị so với bề mặt
           surfacePosition: [0, 0.8, 0.3],
           title: "Màn hình trung tâm",
           description:
@@ -144,21 +143,21 @@ function Model({
         },
         // Điểm đỏ cho vô lăng
         {
-          position: [0.3, 0.62, 0.2], // Đã hạ thấp xuống
+          position: [0.3, 0.61, 0.2], // Hạ xuống chỉ còn 0.01 đơn vị so với bề mặt
           surfacePosition: [0.3, 0.6, 0.2],
-          title: "Vô lăng đa chức n��ng",
+          title: "Vô lăng đa chức năng",
           description: "Vô lăng bọc da cao cấp với các nút điều khiển tích hợp, hỗ trợ đàm thoại rảnh tay",
         },
         // Điểm đỏ cho ghế ngồi
         {
-          position: [-0.3, 0.42, 0], // Đã hạ thấp xuống
+          position: [-0.3, 0.41, 0], // Hạ xuống chỉ còn 0.01 đơn vị so với bề mặt
           surfacePosition: [-0.3, 0.4, 0],
           title: "Ghế da cao cấp",
           description: "Ghế da cao cấp với chức năng chỉnh điện, nhớ vị trí, sưởi và làm mát",
         },
         // Điểm đỏ cho cửa sổ trời
         {
-          position: [0, 1.02, -0.3], // Đã hạ thấp xuống
+          position: [0, 1.01, -0.3], // Hạ xuống chỉ còn 0.01 đơn vị so với bề mặt
           surfacePosition: [0, 1.0, -0.3],
           title: "Cửa sổ trời toàn cảnh",
           description: "Cửa sổ trời toàn cảnh với rèm che tự động, tạo không gian thoáng đãng",
@@ -168,28 +167,28 @@ function Model({
       setHotspots([
         // Điểm đỏ cho động cơ
         {
-          position: [0, 0.42, 0.5], // Đã hạ thấp xuống
+          position: [0, 0.41, 0.5], // Hạ xuống chỉ còn 0.01 đơn vị so với bề mặt
           surfacePosition: [0, 0.4, 0.5],
           title: "Động cơ 2.0L Turbo",
           description: "Động cơ 2.0L Turbo với công suất 228 mã lực, mô-men xoắn 350 Nm, tiết kiệm nhiên liệu",
         },
         // Điểm đỏ cho hệ thống làm mát
         {
-          position: [0.5, 0.42, 0.3], // Đã hạ thấp xuống
+          position: [0.5, 0.41, 0.3], // Hạ xuống chỉ còn 0.01 đơn vị so với bề mặt
           surfacePosition: [0.5, 0.4, 0.3],
           title: "Hệ thống làm mát",
           description: "Hệ thống làm mát hiệu suất cao với khả năng duy trì nhiệt độ động cơ ổn định",
         },
         // Điểm đỏ cho ắc quy
         {
-          position: [-0.5, 0.42, 0.3], // Đã hạ thấp xuống
+          position: [-0.5, 0.41, 0.3], // Hạ xuống chỉ còn 0.01 đơn vị so với bề mặt
           surfacePosition: [-0.5, 0.4, 0.3],
           title: "Ắc quy dung lượng cao",
           description: "Ắc quy dung lượng cao với tuổi thọ bền bỉ, hỗ trợ khởi động nhanh trong mọi điều kiện",
         },
         // Điểm đỏ cho hộp số
         {
-          position: [0, 0.42, -0.3], // Đã hạ thấp xuống
+          position: [0, 0.41, -0.3], // Hạ xuống chỉ còn 0.01 đơn vị so với bề mặt
           surfacePosition: [0, 0.4, -0.3],
           title: "Hộp số tự động 8 cấp",
           description: "Hộp số tự động 8 cấp mượt mà, chuyển số nhanh và tiết kiệm nhiên liệu",
@@ -221,7 +220,6 @@ function Model({
     }
   })
 
-  // Thay đổi phần render các điểm đỏ để điều chỉnh kích thước và hiệu ứng
   return (
     <>
       <primitive ref={model} object={clonedScene} scale={1} position={[0, -0.5, 0]} />
@@ -232,17 +230,17 @@ function Model({
           <group key={index}>
             {/* Điểm đỏ chính */}
             <mesh position={hotspot.position} onClick={() => setActiveHotspot(index === activeHotspot ? null : index)}>
-              <sphereGeometry args={[0.04, 16, 16]} />
+              <sphereGeometry args={[0.03, 16, 16]} />
               <meshBasicMaterial color="#ef4444" />
             </mesh>
 
             {/* Hiệu ứng nhấp nháy */}
             <mesh position={hotspot.position}>
-              <sphereGeometry args={[0.06, 16, 16]} />
+              <sphereGeometry args={[0.04, 16, 16]} />
               <meshBasicMaterial color="#ef4444" transparent={true} opacity={0.3 + Math.sin(time * 5) * 0.2} />
             </mesh>
 
-            {/* Đường kết nối từ điểm đỏ đến bề mặt xe */}
+            {/* Đường kết nối từ điểm đỏ đến bề mặt xe - Rất ngắn vì điểm đỏ gần bề mặt */}
             <Line
               points={[hotspot.position, hotspot.surfacePosition]}
               color="#ef4444"
@@ -253,14 +251,14 @@ function Model({
 
             {/* Điểm kết nối trên bề mặt xe */}
             <mesh position={hotspot.surfacePosition}>
-              <sphereGeometry args={[0.01, 8, 8]} />
+              <sphereGeometry args={[0.005, 8, 8]} />
               <meshBasicMaterial color="#ef4444" />
             </mesh>
 
             {/* Thông tin chi tiết khi nhấp vào */}
             {activeHotspot === index && (
               <Html
-                position={[hotspot.position[0], hotspot.position[1] + 0.15, hotspot.position[2]]}
+                position={[hotspot.position[0], hotspot.position[1] + 0.1, hotspot.position[2]]}
                 center
                 style={{ pointerEvents: "none" }}
               >
