@@ -773,6 +773,84 @@ export default function CarDetailPage() {
               })}
           </div>
         </div>
+
+        {/* CTA Section */}
+        <div className="mt-16 bg-zinc-800/30 backdrop-blur-sm border border-zinc-700 rounded-2xl p-8">
+          <h2 className="text-2xl font-bold text-white mb-6">Trải Nghiệm Thêm</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Link href={`/ar-vr?car=${id}`}>
+              <Button className="w-full h-auto py-6 bg-gradient-to-r from-red-600/20 to-red-500/20 hover:from-red-600 hover:to-red-500 text-white border border-red-500/30 hover:border-red-500 rounded-xl flex flex-col items-center gap-3 transition-all duration-300">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-red-500"
+                >
+                  <path d="M2.5 19.5A2.5 2.5 0 0 1 5 17H19a2.5 2.5 0 0 1 2.5 2.5v0a2.5 2.5 0 0 1-2.5 2.5H5a2.5 2.5 0 0 1-2.5-2.5v0Z" />
+                  <path d="M12 17v-2" />
+                  <path d="M7 14h.01" />
+                  <path d="M17 14h.01" />
+                  <path d="M2 10.5C2 5.25 12 5.25 12 1c0 4.25 10 4.25 10 9.5" />
+                </svg>
+                <span className="font-medium">Xem Trong AR/VR</span>
+                <span className="text-sm text-zinc-300">Trải nghiệm xe trong không gian thực tế ảo</span>
+              </Button>
+            </Link>
+
+            <Link href={`/payment?car=${id}`}>
+              <Button className="w-full h-auto py-6 bg-gradient-to-r from-red-600/20 to-red-500/20 hover:from-red-600 hover:to-red-500 text-white border border-red-500/30 hover:border-red-500 rounded-xl flex flex-col items-center gap-3 transition-all duration-300">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-red-500"
+                >
+                  <rect width="20" height="14" x="2" y="5" rx="2" />
+                  <line x1="2" x2="22" y1="10" y2="10" />
+                </svg>
+                <span className="font-medium">Đặt Cọc Xe</span>
+                <span className="text-sm text-zinc-300">Thanh toán đặt cọc để sở hữu xe</span>
+              </Button>
+            </Link>
+
+            <Link href={`/contract?car=${id}`}>
+              <Button className="w-full h-auto py-6 bg-gradient-to-r from-red-600/20 to-red-500/20 hover:from-red-600 hover:to-red-500 text-white border border-red-500/30 hover:border-red-500 rounded-xl flex flex-col items-center gap-3 transition-all duration-300">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-red-500"
+                >
+                  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                  <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z" />
+                  <path d="M9 9h1" />
+                  <path d="M9 13h6" />
+                  <path d="M9 17h6" />
+                </svg>
+                <span className="font-medium">Ký Hợp Đồng</span>
+                <span className="text-sm text-zinc-300">Ký kết hợp đồng mua xe trực tuyến</span>
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   )
