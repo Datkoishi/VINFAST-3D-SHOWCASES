@@ -20,6 +20,9 @@ export default function ARVRPage() {
   const [qrCodeVisible, setQrCodeVisible] = useState(false)
   const [selectedCar, setSelectedCar] = useState("lux-2-0")
 
+  // URL của trang web đã triển khai
+  const deployedUrl = "https://v0-vinfast-3d-model-website-git-main-datkoishis-projects.vercel.app"
+
   useEffect(() => {
     // Kiểm tra hỗ trợ WebXR
     if (typeof navigator !== "undefined" && navigator.xr) {
@@ -46,7 +49,7 @@ export default function ARVRPage() {
     if (isMobile) {
       if (isiOS) {
         // Truy cập camera trực tiếp trên iOS
-        window.location.href = `ar://?model=${selectedCar}`
+        window.location.href = `ar://?model=${selectedCar}&url=${deployedUrl}/models/${selectedCar}`
       } else {
         // Trên thiết bị Android, hiển thị hướng dẫn
         toast({
@@ -54,7 +57,7 @@ export default function ARVRPage() {
           description: "Đang mở trải nghiệm AR trên thiết bị của bạn",
         })
         // Mở link AR Android
-        window.location.href = `intent://arvr.vinfast.vn/models/${selectedCar}#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;`
+        window.location.href = `intent://${deployedUrl.replace("https://", "")}/models/${selectedCar}#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;`
       }
     } else {
       // Trên desktop, hiển thị mã QR
@@ -158,11 +161,7 @@ export default function ARVRPage() {
                       {qrCodeVisible ? (
                         <div className="absolute inset-0 flex flex-col items-center justify-center">
                           <div className="bg-white p-4 rounded-lg mb-4">
-                            <QrCode
-                              size={200}
-                              className="text-black"
-                              value={`https://arvr.vinfast.vn/models/${selectedCar}`}
-                            />
+                            <QrCode size={200} className="text-black" value={`${deployedUrl}/models/${selectedCar}`} />
                           </div>
                           <p className="text-white text-center">Quét mã QR bằng điện thoại để trải nghiệm AR</p>
                           <Button
