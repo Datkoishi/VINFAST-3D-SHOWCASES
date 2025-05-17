@@ -65,9 +65,7 @@ export default function Header() {
           <Link href="/contract" className="font-medium text-white hover:text-red-400 transition-colors">
             Hợp Đồng
           </Link>
-          <Link href="/about" className="font-medium text-white hover:text-red-400 transition-colors">
-            Giới Thiệu
-          </Link>
+          
         </nav>
 
         <div className="flex items-center gap-2">
