@@ -126,13 +126,7 @@ export default function Header() {
                 >
                   Hợp Đồng
                 </Link>
-                <Link
-                  href="/about"
-                  className="font-medium text-white hover:text-red-400 transition-colors py-2 border-b border-zinc-800"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Giới Thiệu
-                </Link>
+               
                 <Link
                   href="/contact"
                   className="font-medium text-white hover:text-red-400 transition-colors py-2 border-b border-zinc-800"
