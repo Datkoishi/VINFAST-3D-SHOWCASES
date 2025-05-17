@@ -273,6 +273,171 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* Tính Năng Mới Section */}
+      <div className="relative py-24 bg-gradient-to-b from-zinc-900 to-black">
+        <div className="absolute inset-0 bg-[url('/images/pattern-bg.png')] opacity-5 bg-repeat"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8 }}
+              className="text-3xl md:text-4xl font-bold text-white mb-4"
+            >
+              Tính Năng Mới
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-xl text-zinc-400 max-w-2xl mx-auto"
+            >
+              Khám phá các tính năng mới nhất của VinFast 3D Showcase
+            </motion.p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              whileHover={{ y: -10 }}
+            >
+              <Link href="/ar-vr">
+                <Card className="overflow-hidden h-full bg-zinc-800/50 border-zinc-700 backdrop-blur-sm group hover:bg-zinc-800/80 transition-all duration-300">
+                  <div className="relative h-48 bg-gradient-to-br from-zinc-800 to-zinc-900 overflow-hidden">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="80"
+                        height="80"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-red-500 opacity-80"
+                      >
+                        <path d="M2.5 19.5A2.5 2.5 0 0 1 5 17H19a2.5 2.5 0 0 1 2.5 2.5v0a2.5 2.5 0 0 1-2.5 2.5H5a2.5 2.5 0 0 1-2.5-2.5v0Z" />
+                        <path d="M12 17v-2" />
+                        <path d="M7 14h.01" />
+                        <path d="M17 14h.01" />
+                        <path d="M2 10.5C2 5.25 12 5.25 12 1c0 4.25 10 4.25 10 9.5" />
+                      </svg>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent opacity-70"></div>
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold text-white mb-2">Trải Nghiệm AR/VR</h3>
+                    <p className="text-zinc-400 mb-4">
+                      Khám phá xe VinFast trong không gian thực tế ảo và thực tế tăng cường
+                    </p>
+                  </CardContent>
+                  <CardFooter className="p-6 pt-0">
+                    <Button className="w-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white border-0 rounded-full group">
+                      Trải Nghiệm Ngay
+                      <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              whileHover={{ y: -10 }}
+            >
+              <Link href="/payment">
+                <Card className="overflow-hidden h-full bg-zinc-800/50 border-zinc-700 backdrop-blur-sm group hover:bg-zinc-800/80 transition-all duration-300">
+                  <div className="relative h-48 bg-gradient-to-br from-zinc-800 to-zinc-900 overflow-hidden">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="80"
+                        height="80"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-red-500 opacity-80"
+                      >
+                        <rect width="20" height="14" x="2" y="5" rx="2" />
+                        <line x1="2" x2="22" y1="10" y2="10" />
+                      </svg>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent opacity-70"></div>
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold text-white mb-2">Thanh Toán Đơn Giản</h3>
+                    <p className="text-zinc-400 mb-4">
+                      Đặt cọc và thanh toán xe VinFast với nhiều phương thức thanh toán linh hoạt
+                    </p>
+                  </CardContent>
+                  <CardFooter className="p-6 pt-0">
+                    <Button className="w-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white border-0 rounded-full group">
+                      Đặt Cọc Ngay
+                      <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              whileHover={{ y: -10 }}
+            >
+              <Link href="/contract">
+                <Card className="overflow-hidden h-full bg-zinc-800/50 border-zinc-700 backdrop-blur-sm group hover:bg-zinc-800/80 transition-all duration-300">
+                  <div className="relative h-48 bg-gradient-to-br from-zinc-800 to-zinc-900 overflow-hidden">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="80"
+                        height="80"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-red-500 opacity-80"
+                      >
+                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                        <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z" />
+                        <path d="M9 9h1" />
+                        <path d="M9 13h6" />
+                        <path d="M9 17h6" />
+                      </svg>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent opacity-70"></div>
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold text-white mb-2">Ký Hợp Đồng Online</h3>
+                    <p className="text-zinc-400 mb-4">
+                      Ký kết hợp đồng mua xe VinFast trực tuyến nhanh chóng và an toàn
+                    </p>
+                  </CardContent>
+                  <CardFooter className="p-6 pt-0">
+                    <Button className="w-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white border-0 rounded-full group">
+                      Ký Hợp Đồng
+                      <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
       {/* Features Section */}
       <div className="relative py-24 bg-gradient-to-b from-black to-zinc-900">
         <div className="absolute inset-0 bg-[url('/images/pattern-bg.png')] opacity-5 bg-repeat"></div>

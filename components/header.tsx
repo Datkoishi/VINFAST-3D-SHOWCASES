@@ -56,11 +56,17 @@ export default function Header() {
           <Link href="/models" className="font-medium text-white hover:text-red-400 transition-colors">
             Các Dòng Xe
           </Link>
+          <Link href="/ar-vr" className="font-medium text-white hover:text-red-400 transition-colors">
+            AR/VR
+          </Link>
+          <Link href="/payment" className="font-medium text-white hover:text-red-400 transition-colors">
+            Thanh Toán
+          </Link>
+          <Link href="/contract" className="font-medium text-white hover:text-red-400 transition-colors">
+            Hợp Đồng
+          </Link>
           <Link href="/about" className="font-medium text-white hover:text-red-400 transition-colors">
             Giới Thiệu
-          </Link>
-          <Link href="/contact" className="font-medium text-white hover:text-red-400 transition-colors">
-            Liên Hệ
           </Link>
         </nav>
 
@@ -98,6 +104,27 @@ export default function Header() {
                   onClick={() => setIsOpen(false)}
                 >
                   Các Dòng Xe
+                </Link>
+                <Link
+                  href="/ar-vr"
+                  className="font-medium text-white hover:text-red-400 transition-colors py-2 border-b border-zinc-800"
+                  onClick={() => setIsOpen(false)}
+                >
+                  AR/VR
+                </Link>
+                <Link
+                  href="/payment"
+                  className="font-medium text-white hover:text-red-400 transition-colors py-2 border-b border-zinc-800"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Thanh Toán
+                </Link>
+                <Link
+                  href="/contract"
+                  className="font-medium text-white hover:text-red-400 transition-colors py-2 border-b border-zinc-800"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Hợp Đồng
                 </Link>
                 <Link
                   href="/about"

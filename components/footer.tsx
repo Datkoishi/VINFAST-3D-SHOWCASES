@@ -29,6 +29,21 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/ar-vr" className="text-zinc-400 hover:text-white transition-colors">
+                  AR/VR
+                </Link>
+              </li>
+              <li>
+                <Link href="/payment" className="text-zinc-400 hover:text-white transition-colors">
+                  Thanh Toán
+                </Link>
+              </li>
+              <li>
+                <Link href="/contract" className="text-zinc-400 hover:text-white transition-colors">
+                  Hợp Đồng
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="text-zinc-400 hover:text-white transition-colors">
                   Giới Thiệu
                 </Link>
