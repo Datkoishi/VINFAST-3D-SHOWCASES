@@ -32,17 +32,36 @@ export default function ARVRPage() {
     }
   }, [])
 
+  const detectiOS = () => {
+    if (typeof window === "undefined") return false
+    return (
+      /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+    )
+  }
+
+  const isiOS = detectiOS()
+
   const handleARView = () => {
     if (isMobile) {
+      if (isiOS) {
+        // Truy cập camera trực tiếp trên iOS
+        window.location.href = `ar://?model=${selectedCar}`
+      } else {
+        // Trên thiết bị Android, hiển thị hướng dẫn
+        toast({
+          title: "Truy cập AR",
+          description: "Đang mở trải nghiệm AR trên thiết bị của bạn",
+        })
+        // Mở link AR Android
+        window.location.href = `intent://arvr.vinfast.vn/models/${selectedCar}#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;`
+      }
+    } else {
+      // Trên desktop, hiển thị mã QR
       setQrCodeVisible(true)
       toast({
         title: "Quét mã QR",
         description: "Quét mã QR để trải nghiệm AR trên thiết bị di động của bạn",
-      })
-    } else {
-      toast({
-        title: "Cần thiết bị di động",
-        description: "Vui lòng sử dụng thiết bị di động để trải nghiệm AR",
       })
     }
   }
@@ -139,7 +158,11 @@ export default function ARVRPage() {
                       {qrCodeVisible ? (
                         <div className="absolute inset-0 flex flex-col items-center justify-center">
                           <div className="bg-white p-4 rounded-lg mb-4">
-                            <QrCode size={200} className="text-black" />
+                            <QrCode
+                              size={200}
+                              className="text-black"
+                              value={`https://arvr.vinfast.vn/models/${selectedCar}`}
+                            />
                           </div>
                           <p className="text-white text-center">Quét mã QR bằng điện thoại để trải nghiệm AR</p>
                           <Button
