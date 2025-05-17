@@ -56,7 +56,7 @@
 
 
 ```shellscript
-git clone https://github.com/your-username/vinfast-3d-showcase.git
+git clone https://github.com/Datkoishi/vinfast-3d-showcase.git
 cd vinfast-3d-showcase
 ```
 
