@@ -73,20 +73,7 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="border-zinc-700 text-white hidden md:flex"
-            onClick={() => {
-              toast({
-                title: "Tư vấn trực tuyến",
-                description: "Nhấp vào biểu tượng chat ở góc phải dưới để bắt đầu trò chuyện",
-              })
-            }}
-          >
-            <MessageCircle className="h-4 w-4 mr-2" />
-            Tư vấn trực tuyến
-          </Button>
+         
           <ModeToggle />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
