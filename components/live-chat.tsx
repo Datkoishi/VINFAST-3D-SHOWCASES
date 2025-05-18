@@ -11,7 +11,7 @@ import { MessageCircle, X, Send, User, Bot, Phone, Clock } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { useToast } from "@/components/ui/use-toast"
-import { getChatbotResponse } from "@/services/chat-service"
+import { getChatbotResponse } from "@/app/services/chat-service"
 
 interface Message {
   id: string
@@ -32,7 +32,7 @@ export default function LiveChat() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const { toast } = useToast()
 
-  // Initial greeting when chat is opened
+  // Lời chào ban đầu khi chat được mở
   useEffect(() => {
     if (isOpen && messages.length === 0) {
       const initialResponse = getChatbotResponse("hello")
@@ -46,18 +46,18 @@ export default function LiveChat() {
       setMessages([initialMessage])
     }
 
-    // Reset unread count when chat is opened
+    // Đặt lại số tin nhắn chưa đọc khi chat được mở
     if (isOpen) {
       setUnreadCount(0)
     }
   }, [isOpen, messages.length])
 
-  // Auto-scroll to bottom of messages
+  // Tự động cuộn xuống cuối tin nhắn
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
 
-  // Simulate a notification after 30 seconds if chat is not open
+  // Mô phỏng thông báo sau 30 giây nếu chat không được mở
   useEffect(() => {
     if (messages.length === 0) {
       const timer = setTimeout(() => {
@@ -82,7 +82,7 @@ export default function LiveChat() {
   const handleSendMessage = (text: string = inputValue) => {
     if (!text.trim()) return
 
-    // Add user message
+    // Thêm tin nhắn người dùng
     const userMessage: Message = {
       id: Date.now().toString(),
       content: text,
@@ -92,10 +92,10 @@ export default function LiveChat() {
     setMessages((prev) => [...prev, userMessage])
     setInputValue("")
 
-    // Simulate bot typing
+    // Mô phỏng bot đang nhập
     setIsTyping(true)
 
-    // If connected to agent, simulate agent response
+    // Nếu đã kết nối với tư vấn viên, mô phỏng phản hồi của tư vấn viên
     if (hasAgent) {
       setTimeout(() => {
         setIsTyping(false)
@@ -116,7 +116,7 @@ export default function LiveChat() {
       return
     }
 
-    // Get bot response
+    // Lấy phản hồi từ bot
     setTimeout(() => {
       setIsTyping(false)
       const botResponse = getChatbotResponse(text)
@@ -141,7 +141,7 @@ export default function LiveChat() {
   const connectToAgent = () => {
     setIsConnectingToAgent(true)
 
-    // Add system message
+    // Thêm tin nhắn hệ thống
     const systemMessage: Message = {
       id: Date.now().toString(),
       content: "Đang kết nối với tư vấn viên...",
@@ -150,12 +150,12 @@ export default function LiveChat() {
     }
     setMessages((prev) => [...prev, systemMessage])
 
-    // Simulate connection delay
+    // Mô phỏng độ trễ kết nối
     setTimeout(() => {
       setIsConnectingToAgent(false)
       setHasAgent(true)
 
-      // Add agent connected message
+      // Thêm tin nhắn tư vấn viên đã kết nối
       const agentMessage: Message = {
         id: Date.now().toString(),
         content: "Xin chào, tôi là Hương - tư vấn viên VinFast. Tôi có thể giúp gì cho bạn?",
@@ -175,7 +175,7 @@ export default function LiveChat() {
   const handleSuggestedAction = (action: string) => {
     handleSendMessage(action)
 
-    // Special handling for specific actions
+    // Xử lý đặc biệt cho các hành động cụ thể
     if (action === "Gặp tư vấn viên" || action === "Kết nối với tư vấn viên" || action === "Có, tôi cần hỗ trợ") {
       if (!hasAgent && !isConnectingToAgent) {
         connectToAgent()
@@ -197,7 +197,7 @@ export default function LiveChat() {
     }
   }
 
-  // Simple agent response logic
+  // Logic phản hồi đơn giản của tư vấn viên
   const getAgentResponse = (message: string): string => {
     const lowerMessage = message.toLowerCase()
 
@@ -217,13 +217,13 @@ export default function LiveChat() {
       return "Cảm ơn anh/chị đã liên hệ với VinFast. Rất mong được phục vụ anh/chị trong tương lai. Chúc anh/chị một ngày tốt lành!"
     }
 
-    // Default response
+    // Phản hồi mặc định
     return "Cảm ơn anh/chị đã liên hệ. Tôi rất vui được hỗ trợ anh/chị. Anh/chị có thể cho tôi biết thêm về nhu cầu sử dụng xe để tôi có thể tư vấn phù hợp hơn không ạ?"
   }
 
   return (
     <>
-      {/* Chat Bubble */}
+      {/* Bong bóng Chat */}
       <div className="fixed bottom-6 right-6 z-50">
         <AnimatePresence>
           {!isOpen && (
@@ -241,7 +241,7 @@ export default function LiveChat() {
                 <MessageCircle className="h-6 w-6" />
               </Button>
 
-              {/* Unread count badge */}
+              {/* Huy hiệu số tin nhắn chưa đọc */}
               {unreadCount > 0 && (
                 <motion.div
                   initial={{ scale: 0 }}
@@ -256,7 +256,7 @@ export default function LiveChat() {
         </AnimatePresence>
       </div>
 
-      {/* Chat Panel */}
+      {/* Bảng Chat */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -339,7 +339,7 @@ export default function LiveChat() {
                         )}
                       </div>
 
-                      {/* Suggested actions */}
+                      {/* Các hành động được đề xuất */}
                       {message.suggestedActions && message.suggestedActions.length > 0 && message.sender !== "user" && (
                         <div className="mt-2 ml-10 flex flex-wrap gap-2">
                           {message.suggestedActions.map((action, index) => (
@@ -358,7 +358,7 @@ export default function LiveChat() {
                     </div>
                   ))}
 
-                  {/* Typing indicator */}
+                  {/* Chỉ báo đang nhập */}
                   {isTyping && (
                     <div className="mb-4 max-w-[85%] mr-auto">
                       <div className="flex items-start gap-2">

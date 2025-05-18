@@ -7,13 +7,13 @@ import Footer from "@/components/footer"
 import { Analytics } from "@/components/analytics"
 import { Toaster } from "@/components/ui/toaster"
 import { Suspense } from "react"
+import LiveChat from "@/components/live-chat"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
   title: "VinFast 3D Showcase | Trải Nghiệm Xe VinFast Trong Không Gian 3D",
   description: "Khám phá các mô hình 3D của dòng xe VinFast với công nghệ tương tác hiện đại",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -30,6 +30,7 @@ export default function RootLayout({
               <Header />
               <main className="flex-1">{children}</main>
               <Footer />
+              <LiveChat />
               <Toaster />
               <Analytics />
             </div>
