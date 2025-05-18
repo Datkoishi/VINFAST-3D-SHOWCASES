@@ -3,16 +3,18 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
-import { Menu, X } from "lucide-react"
+import { Menu, X, MessageCircle } from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { useToast } from "@/components/ui/use-toast"
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const { toast } = useToast()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,10 +67,26 @@ export default function Header() {
           <Link href="/contract" className="font-medium text-white hover:text-red-400 transition-colors">
             Hợp Đồng
           </Link>
-          
+          <Link href="/about" className="font-medium text-white hover:text-red-400 transition-colors">
+            Giới Thiệu
+          </Link>
         </nav>
 
         <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-zinc-700 text-white hidden md:flex"
+            onClick={() => {
+              toast({
+                title: "Tư vấn trực tuyến",
+                description: "Nhấp vào biểu tượng chat ở góc phải dưới để bắt đầu trò chuyện",
+              })
+            }}
+          >
+            <MessageCircle className="h-4 w-4 mr-2" />
+            Tư vấn trực tuyến
+          </Button>
           <ModeToggle />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
@@ -124,7 +142,13 @@ export default function Header() {
                 >
                   Hợp Đồng
                 </Link>
-               
+                <Link
+                  href="/about"
+                  className="font-medium text-white hover:text-red-400 transition-colors py-2 border-b border-zinc-800"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Giới Thiệu
+                </Link>
                 <Link
                   href="/contact"
                   className="font-medium text-white hover:text-red-400 transition-colors py-2 border-b border-zinc-800"
